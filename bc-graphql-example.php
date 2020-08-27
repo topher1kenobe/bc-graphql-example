@@ -236,8 +236,7 @@ class BC_GraphQL_Example {
 	 */
 	public function get_graphql_data() {
 
-		$headers[ 'X-Auth-Token' ]	= $this->access_token;
-		$headers[ 'X-Auth-Client' ] = $this->client_id;
+		// Set up the headers
 		$headers[ 'content-type' ] = 'application/json';
 		$headers[ 'Authorization' ] = 'Bearer ' . $this->auth_token;;
 
