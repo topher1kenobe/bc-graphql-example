@@ -188,15 +188,18 @@ class BC_GraphQL_Example {
 	 */
 	public function get_remote_auth_token() {
 
-		// set up the headers
+		// Set up the REST authentication headers
 		$headers[ 'X-Auth-Token' ]	= $this->access_token;
 		$headers[ 'X-Auth-Client' ] = $this->client_id;
 		$headers[ 'content-type' ]  = 'application/json';
 
-		// set an expiry for the token
+		// The token needs an expiration. You can either set it short
+		// and manage recreation, or set it very long and never change
+		// Regardless it needs to be a UTC timestamp
 		$expires = date('U') + 100000000;
 
-		// set up the query to get the token
+		// Set up the query to get the token. Formatted in JSON, requires
+		// the channel ID, the expiration, and CORS allowance.
 		$query = '
 			{
 			  "channel_id": ' . $this->channel_id . ',
@@ -212,7 +215,8 @@ class BC_GraphQL_Example {
 		$args[ 'headers'] = $headers;
 		$args[ 'body' ]   = $query;
 
-		// where are we sending the request?
+		// The request gets sent to the token API endpoint with your 
+		// store hash in the URL.
 		$url = 'https://api.bigcommerce.com/stores/' . $this->store_hash . '/v3/storefront/api-token';
 
 		// send the query
