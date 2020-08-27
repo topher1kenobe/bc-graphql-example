@@ -1,1 +1,0 @@
-# bc-graphql-example
