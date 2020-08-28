@@ -162,6 +162,7 @@ class BC_GraphQL_Example {
 	 */
 	public function get_local_auth_token() {
 
+		// get the token from the options table
 		$this->auth_token = get_option( 'bigcommerce_auth_token' );
 
 		// if the local copy is empty, go get one from BigCommerce
@@ -242,8 +243,10 @@ class BC_GraphQL_Example {
 
 		// Set up the headers
 		$headers[ 'content-type' ] = 'application/json';
-		$headers[ 'Authorization' ] = 'Bearer ' . $this->auth_token;;
+		$headers[ 'Authorization' ] = 'Bearer ' . $this->auth_token;
 
+		// Set up the POST arguments. These need Headers, Method, and Body
+		// headers holds the headers array we created above
 		$args[ 'headers'] = $headers;
 		$args[ 'method']  = 'POST';
 
